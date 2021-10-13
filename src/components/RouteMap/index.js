@@ -8,7 +8,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable quotes */
 import React from "react";
-import { View, Text, Image, FlatList } from "react-native";
+
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 
@@ -30,12 +30,15 @@ const RouteMap = () => {
       <MapView
         style={{height:"100%", width:"100%",}}
         provider={PROVIDER_GOOGLE}
+        showsUserLocation={true}
         initialRegion={{
           latitude: 28.450627,
           longitude: -16.263045,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
-        }}> 
+        }}
+        showsCompass={true}
+        > 
         <MapViewDirections
           origin={origin}
           destination={destination}

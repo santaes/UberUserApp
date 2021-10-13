@@ -9,18 +9,27 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable semi */
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import styles from './styles';
+import { useNavigation } from '@react-navigation/core';
 
 const HomeSearch = () => {
+    const navigation = useNavigation();
+
+    const goToSearch = () => {
+        navigation.navigate('DestinationSearch')
+    };
     return (
         <View>
             {/* input box */}
-            <View style={styles.inputBox}>
+            <Pressable 
+            style={styles.inputBox}
+            onPress={goToSearch}
+            >
                 <Text style={styles.inputText}>Where to?</Text>
                 <View style={styles.timeContainer}>
                 <AntDesign name="clockcircle" size={20} color="#535353" />
@@ -29,7 +38,7 @@ const HomeSearch = () => {
 
                 </View>
 
-            </View>
+            </Pressable>
 
             {/* previous destination */}
             <View style={styles.row}>

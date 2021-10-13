@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
 /**
  * Metro configuration for React Native
  * https://github.com/facebook/react-native
@@ -6,6 +8,9 @@
  */
 
 module.exports = {
+  resolver: {
+    blacklistRE: /#current-cloud-backend/
+  },
   transformer: {
     getTransformOptions: async () => ({
       transform: {
