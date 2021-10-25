@@ -9,17 +9,15 @@ import HomeScreen from '../screens/HomeScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import DestinationSearch from './../screens/DestinationSearch';
 import SearchResults from './../screens/SearchResults';
+import OrderScreen from '../screens/OrderScreen';
 
 
 const Stack = createStackNavigator();
 
 const HomeNavigator = () => {
     return (
-            <Stack.Navigator
-                
-                screenOptions={{
-                    
-              }}
+            <Stack.Navigator initialRouteName={"Home"}
+    
             >
                 <Stack.Screen
                 
@@ -35,12 +33,21 @@ const HomeNavigator = () => {
                  component={DestinationSearch}
                  options={{
                     headerShown: true,
-                    title:false,     
+                    title:false, 
+                    headerTransparent: true,    
                 }} 
                  />
                 <Stack.Screen
                  name={"SearchResults"} 
                  component={SearchResults}
+                 options={{
+                     headerTransparent: true,
+                     title:false, 
+                }}  
+                 />
+                  <Stack.Screen
+                 name={"OrderPage"} 
+                 component={OrderScreen}
                  options={{
                      headerTransparent: true,
                      title:false, 

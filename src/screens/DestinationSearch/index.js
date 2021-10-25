@@ -11,7 +11,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TextInput, SafeAreaView } from 'react-native';
 import styles from './styles';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -27,15 +27,18 @@ const homePlace = {
     geometry: { location: { lat: 48.8496818, lng: 2.2940881 } },
   };
 
-const DestinationSearch = () => {
+  
 
 
+   const DestinationSearch = () => {
+
+    
 
     const [originPlace, setOriginPlace] = useState(null);
     const [destinationPlace, setDestinationPlace] = useState(null);
 
     const navigation = useNavigation();
-
+    const ref_input2 = useRef();
 
 
     useEffect(() => {
@@ -56,6 +59,7 @@ const DestinationSearch = () => {
                     currentLocation={true}
                     currentLocationLabel='My location'
                     placeholder='From'
+                    
                     styles={{
                         container: styles.autoCompleteContainer,
                         listView:  styles.listView,
@@ -64,7 +68,8 @@ const DestinationSearch = () => {
                     }}
                     onPress={(data, details = null) => {
                         setOriginPlace({data, details});
-                          
+                        ref_input2.current.focus();
+                            
                     }}
                     
                     fetchDetails={true}
@@ -76,12 +81,19 @@ const DestinationSearch = () => {
                     renderDescription={(data) => data.description || data.vicinity}
                     isRowScrollable={true}
                     predefinedPlaces={[homePlace, workPlace]}
-                    
+                    textInputProps={{
+                        onSubmitEditing :() => ref_input2.current.focus(),
+                        
+                      }}
+                      
+                    returnKeyType="next"
+                    autofocus= 'true'
                     
                 />
                  <GooglePlacesAutocomplete
                     enablePoweredByContainer={false}
                     placeholder='Where to?'
+                    ref={ref_input2}
                     styles={{
                         container: {
                             ...styles.autoCompleteContainer,

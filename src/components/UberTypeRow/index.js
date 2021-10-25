@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-undef */
 /* eslint-disable comma-dangle */
 /* eslint-disable prettier/prettier */
@@ -12,14 +13,14 @@
 /* eslint-disable prettier/prettier */
 
 import React from 'react';
-import { View, Text, Image,  } from 'react-native';
+import { View, Text, Image, Pressable } from 'react-native';
 import styles from './styles';
 import  IonIcons  from 'react-native-vector-icons/Ionicons';
-import  Entypo  from 'react-native-vector-icons/Entypo';
+
 
 const UberTypeRow = (props) => {
 
-    const {type} = props;
+    const {type, onPress, isSelected} = props;
 
     const getImage = () => {
         if (type.type === 'UberX') {
@@ -32,7 +33,10 @@ const UberTypeRow = (props) => {
     };
 
     return (
-        <View style={styles.container}>
+        <Pressable
+         onPress={onPress} 
+         style={[styles.container,{backgroundColor: isSelected ? '#efefefef' : '#ffffff',}]}
+        >
           {/* image */}
           <Image
            resizeMode="contain"
@@ -59,7 +63,7 @@ const UberTypeRow = (props) => {
           </View>
 
             
-        </View>
+        </Pressable>
     );
 };
 

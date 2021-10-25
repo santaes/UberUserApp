@@ -9,40 +9,20 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 /* eslint-disable quotes */
-import React, {useState,useEffect} from "react";
-import { View, Text, Image, FlatList, Pressable,  } from "react-native";
+import React  from "react";
+import { View,  Image,   } from "react-native";
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
-import {API, graphqlOperation } from 'aws-amplify';
-import {listCars} from '../../graphql/queries';
-import Ionicons from "react-native-vector-icons/Ionicons";
 
 
 
 
 
-const HomeMap = () => {
+const OrderMap = ({car}) => {
 
   
 
-  const [cars, setCars] = useState([]);
+ 
 
-  useEffect(() => {
-    const fetchCars = async () => {
-      try {
-        const response = await API.graphql(
-          graphqlOperation(
-            listCars
-          )
-        );
-        setCars(response.data.listCars.items);
-
-
-      } catch (e) {
-        console.error(e);
-      }
-    };
-    fetchCars();
-  },[]);
 
 
     const getImage = (type) => {
@@ -62,17 +42,16 @@ const HomeMap = () => {
         style={{height:"100%", width:"100%",}}
         provider={PROVIDER_GOOGLE}
         showsUserLocation={true}
-        showsCompass={false}
+        showsCompass={true}
         initialRegion={{
           latitude: 28.450627,
           longitude: -16.263045,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}>
-          
 
-          {cars.map((car) => (
-            <Marker
+          
+            {car && (<Marker
             key={car.id}
             coordinate={{ latitude : car.latitude, longitude : car.longitude }}
             >
@@ -88,13 +67,14 @@ const HomeMap = () => {
               source={getImage(car.type)}
               
             />
-          </Marker>
-          ))}
+          </Marker>)}
+          
       </MapView>
-              
+     
+      
       </View>
      
         
     );
 };
-export default HomeMap; 
+export default OrderMap; 
